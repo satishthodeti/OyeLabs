@@ -1,0 +1,58 @@
+--Write a sql query for finding the subjects for each
+--student, the subjects should be order by alphabetically ?
+-----------------------------------------------------------------------------------------
+-- 1. CUSTOMERS TABLE
+CREATE TABLE customers (customerId INTEGER, name TEXT, email TEXT);
+
+INSERT INTO
+  customers
+VALUES
+  (1, "ravi", "ravi123@gmail.com"),
+  (2, "kishan", "kishan11@gmail.com"),
+  (3, "sameer", "sameer44@gmail.com") 
+------------------------------------------------------------------------------------------
+-- 2. SUBJECTS TABLE
+CREATE TABLE subjects (subjectId integer, name varchar, email varchar)
+INSERT INTO
+  subjects
+VALUES
+  (1, 'English'),
+  (2, 'Hindi'),
+  (3, 'Maths')
+------------------------------------------------------------------------------------------
+ -- 3. SUBJECT_STUDENT_MAPPING TABLE 
+ CREATE TABLE subject_student_mapping (
+    mappingId integer,
+    customerId integer,
+    subjectId integer
+  ) 
+INSERT INTO
+  subject_student_mapping
+VALUES
+  (1, 1, 1),
+  (2, 1, 2),
+  (3, 1, 3),
+  (4, 2, 1),
+  (5, 3, 3),
+  (6, 3, 1)
+------------------------------------------------------------------------------------------
+-- SOLUCTION CODE ENQUARE
+SELECT
+  customers.customerId,
+  customers.name,
+  GROUP_CONCAT (subjects.subjectName) AS subjects
+FROM
+  (
+    customers
+    JOIN subject_student_mapping ON customers.customerId = subject_student_mapping.customerId
+  ) AS T
+  JOIN subjects ON T.subjectId = subjects.subjectId
+GROUP BY
+  customers.customerId,
+  customers.name
+ORDER BY
+  customers.customerId ASC,
+  customers.name ASC,
+  subjects.subjectName ASC;
+  
+ --------------------------------------------------------------------------------

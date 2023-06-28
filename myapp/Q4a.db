@@ -1,0 +1,24 @@
+-----------------------------------------------------
+>>>>>>>>student table 
+CREATE TABLE student (name varchar, email varchar) 
+INSERT INTO
+  person
+VALUES
+  (2, 'male') 
+-----------------------------------------------------
+>>>>>>>>student person 
+CREATE TABLE person(id integer, gender varchar)
+INSERT INTO
+  student
+VALUES
+  ("ravi", "ravi11@yopmail.com", 2)
+-----------------------------------------------------
+>>>>>>>>>>>>>>sqlite Enquary 
+SELECT
+  person.id,
+  person.gender,
+  student.name,
+  student.email
+FROM
+ person
+JOIN student ON person.id = student.id;
